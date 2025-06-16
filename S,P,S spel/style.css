@@ -1,0 +1,291 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  color: white;
+  transition: background 0.5s;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ------- THEMES (SOLID COLOR) -------- */
+.theme-green {
+  background: #1c2e1e !important;
+}
+.theme-blue {
+  background: #141c32 !important;
+}
+.theme-red {
+  background: #8B0000 !important;
+}
+
+/* ------- RED DOTS BACKGROUND -------- */
+#red-dots-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  display: none; /* Only visible in theme-blue */
+}
+.theme-blue #red-dots-bg {
+  display: block;
+  background-image:
+    radial-gradient(circle, #ff2e55 1.2px, transparent 1.2px),
+    radial-gradient(circle, #ff2e55 1.2px, transparent 1.2px);
+  background-size: 40px 40px, 80px 80px;
+  background-position: 0 0, 20px 20px;
+  opacity: 0.30;
+  animation: move-dots 4s linear infinite;
+}
+@keyframes move-dots {
+  0% { background-position: 0 0, 20px 20px; }
+  100% { background-position: 40px 40px, 60px 60px; }
+}
+
+/* ------- ALL CONTENT ABOVE THE DOTS -------- */
+#menu, #game, #howtoOverlay, #adOverlay, .animated-title, .howto-button, #fallingEmojis {
+  position: relative;
+  z-index: 10;
+}
+
+/* ------- BUTTONS -------- */
+.menu-button,
+.howto-button,
+#terugKnop {
+  padding: 15px 30px;
+  font-size: 1.2em;
+  margin: 20px;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  background-color: #b22222;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.28);
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.menu-button:hover,
+.howto-button:hover,
+#terugKnop:hover {
+  background-color: #8b0000;
+}
+
+.menu-button.active {
+  background-color: crimson;
+  transform: scale(1.08);
+  box-shadow: 0 0 16px crimson;
+  z-index: 10;
+}
+
+.theme-green .menu-button,
+.theme-green .howto-button,
+.theme-green #terugKnop {
+  background-color: #236d38;
+}
+.theme-green .menu-button:hover,
+.theme-green .howto-button:hover,
+.theme-green #terugKnop:hover {
+  background-color: #183d1b;
+}
+.theme-green .menu-button.active {
+  background-color: #29c062;
+  box-shadow: 0 0 18px #29c062;
+}
+
+.theme-blue .menu-button,
+.theme-blue .howto-button,
+.theme-blue #terugKnop {
+  background-color: #203675;
+}
+.theme-blue .menu-button:hover,
+.theme-blue .howto-button:hover,
+.theme-blue #terugKnop:hover {
+  background-color: #14203b;
+}
+.theme-blue .menu-button.active {
+  background-color: #e74c3c;
+  box-shadow: 0 0 18px #e74c3c;
+}
+
+/* ------- MISC -------- */
+
+h1.animated-title {
+  font-size: 4em;
+  margin-top: 35px;
+  margin-bottom: 0;
+  font-weight: bold;
+}
+
+.animated-title span {
+  display: inline-block;
+  animation: float 2s infinite ease-in-out;
+}
+.animated-title .reverse {
+  animation-direction: reverse;
+}
+.animated-title span:nth-child(1) { animation-delay: 0s; }
+.animated-title span:nth-child(2) { animation-delay: 1s; }
+.animated-title span:nth-child(3) { animation-delay: 0s; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+.howto-button {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 10001;
+  margin: 0;
+  padding: 16px 28px;
+  font-size: 1.3em;
+  font-weight: 500;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.23);
+}
+
+#menu {
+  margin-top: 0;
+}
+
+#menu .menu-button {
+  margin: 28px 40px 0 40px;
+  font-size: 1.4em;
+  min-width: 220px;
+}
+
+#mediaContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+#menuVideo, #menuImage {
+  display: block;
+  margin: 36px auto 0 auto;
+  max-width: 320px;
+  width: 90vw;
+  border-radius: 18px;
+  box-shadow: 0 0 18px #b22222;
+  background: #c5ffdb;
+  padding: 8px;
+}
+
+#jukebox-mute-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  max-width: 320px;
+  margin: 20px auto 0 auto;
+  width: 90vw;
+  gap: 40px;
+}
+#jukebox-container, #mute-container {
+  display: flex;
+  align-items: center;
+}
+#jukebox-btn, #mute-btn {
+  width: 64px;
+  height: 64px;
+  cursor: pointer;
+  border-radius: 12px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.23);
+  background: #fff;
+  transition: transform .11s;
+  object-fit: contain;
+}
+#jukebox-btn:active, #mute-btn:active {
+  transform: scale(0.93);
+}
+
+#fallingEmojis {
+  position: fixed;
+  pointer-events: none;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+}
+.falling-emoji {
+  position: absolute;
+  font-size: 2.5rem;
+  user-select: none;
+  will-change: transform;
+  pointer-events: none;
+  animation: emoji-fall linear forwards;
+}
+@keyframes emoji-fall {
+  to {
+    transform: translateY(100vh);
+    opacity: 0.6;
+  }
+}
+
+#game .menu-button {
+  margin: 24px 32px 0 32px;
+  font-size: 1.2em;
+  min-width: 180px;
+}
+
+#scoreboard {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  border: 2px solid white;
+  padding: 10px 20px;
+  background-color: rgba(47, 47, 47, 0.85);
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 1.2em;
+  color: white;
+  box-shadow: 0 0 10px #b22222;
+}
+
+#terugKnop {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  margin: 0;
+  padding: 14px 30px;
+  font-size: 1.1em;
+  border-radius: 12px;
+}
+
+#uitleg {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: rgba(255, 255, 255, 0.15);
+  padding: 10px 15px;
+  border: 1px solid white;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1.1em;
+  color: white;
+  box-shadow: 0 0 10px #b22222;
+}
+
+#knoppen {
+  margin-top: 40px;
+}
+
+#keuzes div {
+  margin: 10px 0;
+  font-size: 1.3em;
+  font-weight: bold;
+}
+
+img#winstFoto, img#verliesFoto, img#drawFoto {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 500px;
+  border-radius: 15px;
+  box-shadow: 0 0 20px #b22222;
+}

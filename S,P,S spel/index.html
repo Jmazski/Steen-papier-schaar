@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rock Paper Scissors</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Red dots background ALWAYS first after body -->
+  <div id="red-dots-bg"></div>
+
+  <h1 class="animated-title">
+    <span class="reverse">Rock</span>
+    <span>Paper</span>
+    <span class="reverse">Scissors</span>
+  </h1>
+
+  <button class="howto-button" id="btn-howto">How to play?</button>
+
+  <!-- MAIN MENU -->
+  <div id="menu" style="display: block;">
+    <button class="menu-button" id="btn-endless">Endless</button>
+    <button class="menu-button" id="btn-10points">10 points</button>
+
+    <!-- Media display (image or video) -->
+    <div id="mediaContainer">
+      <video id="menuVideo" src="video/Tricky.mp4" autoplay loop muted playsinline style="display: block;"></video>
+      <img id="menuImage" src="img/FNFM.png" alt="Song image" style="display: none;">
+    </div>
+
+    <audio id="menuMusic" src="music/Song.mp3" loop></audio>
+
+    <div id="jukebox-mute-row">
+      <div id="jukebox-container">
+        <img id="jukebox-btn" src="img/Juke.png" alt="Change music" title="Change music">
+      </div>
+      <div id="mute-container">
+        <img id="mute-btn" src="img/unmute.png" alt="Mute/unmute music" title="Mute/unmute music">
+      </div>
+    </div>
+
+    <div id="fallingEmojis"></div>
+  </div>
+
+  <!-- HOW TO PLAY OVERLAY -->
+  <div id="howtoOverlay" style="
+    display:none;
+    position: fixed;
+    top:0; left:0; width:100vw; height:100vh;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(5px);
+    color: white;
+    font-size: 1.3em;
+    z-index: 9999;
+    text-align: center;
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  ">
+    <div style="max-width: 600px; background: rgba(47,47,47,0.95); padding: 32px 28px; border-radius: 15px; box-shadow: 0 0 30px crimson;">
+      <h2>How do you play Rock Paper Scissors?</h2>
+      <ul style="text-align:left; max-width: 500px; margin: 0 auto 24px;">
+        <li>You choose <b>rock</b>, <b>paper</b> or <b>scissors</b> by clicking a button.</li>
+        <li>The computer also randomly picks one of the three.</li>
+        <li>Rock beats scissors, scissors beats paper, paper beats rock.</li>
+        <li>If you and the computer choose the same, it is a draw.</li>
+        <li>Play just for fun, or up to 10 points!</li>
+      </ul>
+      <button onclick="closeHowto()" style="
+        margin-top: 20px;
+        padding: 12px 24px;
+        font-size: 1.1em;
+        border:none;
+        border-radius: 10px;
+        background-color: crimson;
+        color: white;
+        cursor: pointer;
+      ">Close</button>
+    </div>
+  </div>
+
+  <!-- GAME SECTION -->
+  <div id="game" style="display: none;">
+    <div id="uitleg">Reach 10 points to win!</div>
+
+    <div id="knoppen">
+      <button id="btn-steen" class="menu-button" onclick="play('steen')">🪨 Rock</button>
+      <button id="btn-papier" class="menu-button" onclick="play('papier')">📄 Paper</button>
+      <button id="btn-schaar" class="menu-button" onclick="play('schaar')">✂️ Scissors</button>
+    </div>
+
+    <div id="keuzes" style="margin-top:20px;">
+      <div id="jouwKeuze">Your choice: -</div>
+      <div id="computerKeuze">Computer chose: -</div>
+      <div id="resultaat">Result: -</div>
+    </div>
+
+    <div id="scoreboard">
+      You: <span id="jijScore">0</span> | Computer: <span id="computerScore">0</span>
+    </div>
+
+    <button id="terugKnop" onclick="terugNaarMenu()">Back to menu</button>
+
+    <!-- Win/lose/draw images -->
+    <img id="winstFoto" src="img/Won.png" alt="Win" style="display:none;" />
+    <img id="verliesFoto" src="img/Lost.png" alt="Lose" style="display:none;" />
+    <img id="drawFoto" src="img/Draw.png" alt="Draw" style="display:none;" />
+  </div>
+
+  <!-- Ad overlay -->
+  <div id="adOverlay" style="
+    display:none;
+    position: fixed;
+    top:0; left:0; width:100vw; height:100vh;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(5px);
+    color: white;
+    font-size: 2em;
+    z-index: 9999;
+    text-align: center;
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  ">
+    <img src="img/hoi.png" alt="Advertisement" style="max-width: 80vw; max-height: 60vh; border-radius: 15px; box-shadow: 0 0 30px crimson;">
+    <button onclick="closeAd()" style="
+      margin-top: 30px;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      border:none;
+      border-radius: 10px;
+      background-color: crimson;
+      color: white;
+      cursor: pointer;
+    ">Close advertisement</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
